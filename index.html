@@ -4,8 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Allxep Tennis - 콘텐츠 확인</title>
+    <!-- 버튼에 사용할 굵은 폰트 불러오기 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@900&display=swap" rel="stylesheet">
+
     <style>
-        /* 페이지 여백을 없애고 배경을 검은색으로 */
         body {
             margin: 0;
             background-color: #000000;
@@ -14,75 +18,66 @@
             align-items: center;
             min-height: 100vh;
         }
-
-        /* 이미지를 담을 컨테이너, 위치 기준점 역할 */
         .image-container {
-            position: relative; /* 자식 요소의 absolute 위치 기준 */
-            max-width: 1200px; /* 이미지의 최대 너비 (원본 이미지 너비에 맞게 조절) */
+            position: relative;
+            max-width: 1200px;
             width: 100%;
         }
-
-        /* 화면에 보여줄 메인 이미지 */
         .main-image {
-            display: block; /* 이미지 아래 불필요한 여백 제거 */
-            width: 100%; /* 컨테이너 너비에 꽉 차게 */
+            display: block;
+            width: 100%;
             height: auto;
         }
 
-        /* 이미지 위 '콘텐츠 보러가기' 버튼 영역에 올릴 투명한 링크 */
-        .clickable-button {
-            position: absolute; /* image-container를 기준으로 위치 고정 */
+        /* --- 코드로 새로 만든 버튼 스타일 (가장 중요!) --- */
+        .coded-button {
+            /* 위치 설정 */
+            position: absolute;
+            top: 83%; /* 위에서 83% 떨어진 위치 */
+            left: 78%; /* 왼쪽에서 78% 떨어진 위치 */
+            transform: translateX(-50%); /* X축 중앙 정렬 트릭 */
+
+            /* 디자인 설정 */
+            background-color: #a8ff00; /* 형광 초록색 배경 */
+            color: #000000; /* 검은색 글씨 */
+            font-family: 'Noto Sans KR', sans-serif;
+            font-weight: 900; /* 가장 굵은 글씨체 */
+            font-size: 18px;
+            padding: 12px 35px; /* 버튼의 안쪽 여백 (세로, 가로) */
+            border-radius: 50px; /* 아주 둥근 모서리 */
+            text-decoration: none; /* 링크 밑줄 제거 */
             
-            /* --- 버튼 위치 미세 조정 (가장 중요!) --- */
-            /* 위에서부터 82% 떨어진 위치에 배치 */
-            top: 82%; 
-            /* 왼쪽에서부터 63% 떨어진 위치에 배치 */
-            left: 63%;
-            /* 버튼의 너비를 전체 이미지 너비의 30%로 설정 */
-            width: 30%;
-            /* 버튼의 높이를 전체 이미지 높이의 10%로 설정 */
-            height: 10%;
-
-            /* 사용자가 클릭할 수 있도록 커서 모양 변경 */
+            /* 그림자와 효과 */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
             cursor: pointer;
-
-            /* (선택) 버튼 위치를 확인하고 싶을 때 아래 주석을 해제하세요 */
-            /* background-color: rgba(255, 0, 0, 0.5); */
-
-            /* (선택) 마우스를 올리면 버튼에 네온 효과 주기 */
-            border-radius: 50px;
-            transition: box-shadow 0.3s ease;
+            transition: all 0.2s ease-in-out;
         }
 
-        .clickable-button:hover {
-            box-shadow: 0 0 20px rgba(168, 255, 0, 0.8); /* 로고의 네온 색상과 유사한 그림자 효과 */
+        /* 버튼에 마우스를 올렸을 때 효과 */
+        .coded-button:hover {
+            transform: translateX(-50%) scale(1.05); /* 중앙 정렬 유지하며 살짝 커짐 */
+            box-shadow: 0 0 25px rgba(168, 255, 0, 0.7); /* 네온 효과 강화 */
         }
     </style>
 </head>
 <body>
-
-    <!-- 이미지를 담는 컨테이너 -->
     <div class="image-container">
-        <!-- 1단계에서 업로드한 이미지 파일명을 여기에 정확히 입력하세요 -->
-        <img src="background.png" alt="Allxep Tennis" class="main-image">
+        <!-- 배경이 될 메인 이미지 -->
+        <img src="main-image.png" alt="Allxep Tennis" class="main-image">
 
-        <!-- 이미지 위 버튼 영역에 겹쳐질 클릭 가능한 링크 -->
-        <a href="#" class="clickable-button" onclick="openLinks(); return false;"></a>
+        <!-- 코드로 새로 만든 버튼 (기존 a 태그를 이것으로 교체) -->
+        <a href="#" class="coded-button" onclick="openLinks(); return false;">
+            콘텐츠 보러가기
+        </a>
     </div>
 
-    <!-- 기존에 사용하던 자바스크립트 기능은 그대로 유지 -->
     <script>
         function openLinks() {
-            // 1. 쿠팡 링크를 새 탭으로 엽니다.
             window.open('https://link.coupang.com/a/cFFdyx', '_blank');
-
-            // 2. 현재 페이지를 인포크링크로 이동시킵니다.
-            // (딜레이를 주어 모바일 앱 전환 문제를 해결)
             setTimeout(function() {
                 window.location.href = 'https://link.inpock.co.kr/allxep';
             }, 100);
         }
     </script>
-
 </body>
 </html>
