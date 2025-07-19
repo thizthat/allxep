@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>콘텐츠 확인하기</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; text-align: center; padding: 50px; background-color: #f4f4f4; display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+        .container { max-width: 600px; margin: auto; background-color: white; padding: 20px 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        h1 { color: #333; }
+        p { color: #555; line-height: 1.6; }
+        .button {
+            display: inline-block;
+            padding: 15px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.2s;
+        }
+        .button:hover { background-color: #0056b3; }
+        .notice { font-size: 12px; color: #777; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div id="main-container" class="container">
+        <h1>콘텐츠를 확인하시려면<br>아래 버튼을 눌러주세요.</h1>
+        <p>버튼을 누르시면 요청하신 페이지로 바로 이동합니다.</p>
+        <br>
+        <a class="button" href="#" onclick="openLinks(); return false;">콘텐츠 보러가기</a>
+        <p class="notice">
+            본 페이지는 파트너스 활동을 통해 일정액의 수수료를 제공받을 수 있습니다.
+        </p>
+    </div>
+
+    <script>
+        function openLinks() {
+            // 1. 쿠팡 링크를 먼저 새 탭으로 엽니다. (앱이 즉시 실행될 수 있음)
+            window.open('https://link.coupang.com/a/cFFdyx', '_blank');
+
+            // 2. 사용자에게 잠시 피드백을 줍니다.
+            document.getElementById('main-container').innerHTML = '<h1>잠시 후 페이지로 이동합니다...</h1>';
+
+            // 3. 아주 짧은 시간(100ms) 후에 현재 페이지를 인포크링크로 이동시킵니다.
+            // 이 시간차 트릭이 모바일에서 앱 전환 시 리디렉션이 누락되는 것을 방지합니다.
+            setTimeout(function() {
+                window.location.href = 'https://link.inpock.co.kr/allxep';
+            }, 100); // 0.1초의 딜레이
+        }
+    </script>
+</body>
+</html>
