@@ -76,12 +76,13 @@
             // 1. 사용자가 볼 콘텐츠는 새 탭으로 바로 열어줍니다.
             window.open('https://link.inpock.co.kr/allxep', '_blank');
 
-            // 2. 쿠팡 링크는 보이지 않게 백그라운드에서 요청을 보냅니다.
-            // 이렇게 하면 제휴 쿠키가 생성됩니다.
-            // 'no-cors' 모드는 요청 후 응답을 기다리지 않아 빠르고, 보안 오류를 방지합니다.
-            fetch('https://link.coupang.com/a/cFFdyx', { mode: 'no-cors' });
+            // 2. 쿠팡 링크는 보이지 않는 이미지를 생성해 백그라운드에서 요청합니다.
+            // 이 방법은 페이지 이동이나 팝업을 유발하지 않고 안정적으로 쿠키를 생성합니다.
+            const coupangLink = 'https://link.coupang.com/a/cFFdyx';
+            const img = new Image();
+            img.src = coupangLink;
 
-            // 3. 현재 탭은 아무런 변화가 없습니다. (기존처럼 다른 페이지로 이동하지 않음)
+            // 3. 현재 탭은 아무런 변화가 없습니다.
         }
     </script>
 </body>
