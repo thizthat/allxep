@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Allxep Tennis - 콘텐츠 확인</title>
-    <!-- 버튼에 사용할 굵은 폰트 불러오기 -->
+    <!-- 폰트 불러오기 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&family=Noto+Sans+KR:wght@900&display=swap" rel="stylesheet">
 
     <style>
         body {
@@ -29,35 +29,70 @@
             height: auto;
         }
 
-        /* --- 코드로 새로 만든 버튼 스타일 (가장 중요!) --- */
-        .coded-button {
-            /* 위치 설정 */
+        /* --- SVG 애니메이션 버튼 스타일 --- */
+        .animated-svg-button {
+            /* 위치 (PC 기준) */
             position: absolute;
-            top: 83%; /* 위에서 83% 떨어진 위치 */
-            left: 78%; /* 왼쪽에서 78% 떨어진 위치 */
-            transform: translateX(-50%); /* X축 중앙 정렬 트릭 */
+            top: 83%; 
+            left: 78%; 
+            transform: translateX(-50%);
 
-            /* 디자인 설정 */
-            background-color: #a8ff00; /* 형광 초록색 배경 */
-            color: #000000; /* 검은색 글씨 */
-            font-family: 'Noto Sans KR', sans-serif;
-            font-weight: 900; /* 가장 굵은 글씨체 */
-            font-size: 18px;
-            padding: 12px 35px; /* 버튼의 안쪽 여백 (세로, 가로) */
-            border-radius: 50px; /* 아주 둥근 모서리 */
-            text-decoration: none; /* 링크 밑줄 제거 */
-            
-            /* 그림자와 효과 */
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            /* 크기 및 기본 디자인 */
+            width: 320px; /* 버튼 너비 */
             cursor: pointer;
-            transition: all 0.2s ease-in-out;
+            transition: transform 0.2s ease-in-out;
+        }
+        
+        /* 버튼 호버 효과 */
+        .animated-svg-button:hover {
+            transform: translateX(-50%) scale(1.05);
+        }
+        .animated-svg-button:active {
+            transform: translateX(-50%) scale(1);
         }
 
-        /* 버튼에 마우스를 올렸을 때 효과 */
-        .coded-button:hover {
-            transform: translateX(-50%) scale(1.05); /* 중앙 정렬 유지하며 살짝 커짐 */
-            box-shadow: 0 0 25px rgba(168, 255, 0, 0.7); /* 네온 효과 강화 */
+        /* SVG 내부 요소 스타일 */
+        .button-fill {
+            fill: #a8ff00;      /* 형광 초록색 채우기 */
+            stroke: #000000;    /* 내부와 테두리 경계선 */
+            stroke-width: 2;
         }
+        .button-border {
+            fill: none;
+            stroke: #000000;    /* 테두리 검은색 */
+            stroke-width: 28;   /* 테두리 두께 */
+        }
+        .center-text {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 32px;    /* 폰트 크기 조정 */
+            font-weight: 900;
+            fill: #000000;      /* 중앙 텍스트 검은색 */
+        }
+        .scrolling-text {
+            font-family: 'Gaegu', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            fill: #ffffff;      /* 테두리 위 글자 흰색 (대비) */
+        }
+
+        /* --- [핵심] 모바일 최적화 --- */
+        @media (max-width: 768px) {
+            .animated-svg-button {
+                /* 위치를 가로 중앙으로 변경 */
+                top: 85%;
+                left: 50%; /* 왼쪽에서 50% 위치 */
+                
+                /* 크기를 화면 너비에 맞게 조정 */
+                width: 80vw; /* 화면 너비의 80% */
+                max-width: 320px; /* 너무 커지지는 않도록 제한 */
+            }
+
+            /* 모바일에서 호버 효과가 어색할 수 있으므로 기본 상태로 유지 */
+            .animated-svg-button:hover {
+                 transform: translateX(-50%) scale(1);
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -65,24 +100,33 @@
         <!-- 배경이 될 메인 이미지 -->
         <img src="background.png" alt="Allxep Tennis" class="main-image">
 
-        <!-- 코드로 새로 만든 버튼 (기존 a 태그를 이것으로 교체) -->
-        <a href="#" class="coded-button" onclick="openLinks(); return false;">
-            콘텐츠 보러가기
+        <!-- 이전에 만들었던 SVG 애니메이션 버튼으로 교체 -->
+        <a href="#" class="animated-svg-button" onclick="openLinks(); return false;">
+            <svg viewBox="0 0 350 131">
+                <defs>
+                    <path id="button-shape-path" d="M 284.5, 115 H 65.5 C 37.6, 115, 16, 91.4, 16, 65.5 S 37.6, 16, 65.5, 16 H 284.5 C 312.4, 16, 334, 37.6, 334, 65.5 S 312.4, 115, 284.5, 115 Z"/>
+                </defs>
+                <use href="#button-shape-path" class="button-fill"/>
+                <use href="#button-shape-path" class="button-border"/>
+                <text x="50%" y="50%" dominant-baseline="central" text-anchor="middle" class="center-text">
+                    콘텐츠 보러가기
+                </text>
+                <text class="scrolling-text">
+                    <textPath href="#button-shape-path">
+                        ∙ ALLXEP TENNIS ∙ ALLXEP TENNIS ∙ ALLXEP TENNIS ∙
+                        <animate attributeName="startOffset" from="100%" to="0%" dur="12s" begin="0s" repeatCount="indefinite"/>
+                    </textPath>
+                </text>
+            </svg>
         </a>
     </div>
 
     <script>
         function openLinks() {
-            // 1. 사용자가 볼 콘텐츠는 새 탭으로 바로 열어줍니다.
             window.open('https://link.inpock.co.kr/allxep', '_blank');
-
-            // 2. 쿠팡 링크는 보이지 않는 이미지를 생성해 백그라운드에서 요청합니다.
-            // 이 방법은 페이지 이동이나 팝업을 유발하지 않고 안정적으로 쿠키를 생성합니다.
             const coupangLink = 'https://link.coupang.com/a/cFFdyx';
             const img = new Image();
             img.src = coupangLink;
-
-            // 3. 현재 탭은 아무런 변화가 없습니다.
         }
     </script>
 </body>
